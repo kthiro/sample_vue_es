@@ -1,28 +1,52 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <component :is="currentComponent"></component>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Informations from './components/Informations.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    Informations, 
+  }, 
+  data: function () {
+    return {
+      currentComponent: 'Informations', 
+    } 
+  }, 
 }
 </script>
 
 <style>
+html {
+  font-size: 62.5%;
+  font-size: calc(62.5% + 0.5vw);
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100vw;
+  height: 100vh;
+}
+section {
+  width: 100vw;
+  height: 100vh;
+}
+.wh-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frame {
+  width: 38vw;
+  height: 62vh;
+  border: 0.2rem solid lightgrey;
+  border-radius: 0.8rem;
+  padding: 1rem;
 }
 </style>
