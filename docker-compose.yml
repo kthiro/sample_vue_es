@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: kthiro/elasticsearch:es_vue
+    build:
+      context: ./elasticsearch
+      dockerfile: Dockerfile
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    expose:
+      - "9200"
+      - "9300"
+    volumes:
+      - data:/usr/share/elasticsearch/data
+    environment:
+      discovery.type: single-node
+    tty: true
+    stdin_open: true
+
+  vuejs:
+    image: kthiro/vuejs:es_vue
+    build:
+      context: ./vuejs
+      dockerfile: Dockerfile
+    container_name: vuejs
+    command: /bin/bash
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    volumes:
+      - ./vuejs/app:/app:cached
+    depends_on:
+      - "elasticsearch"
+    tty: true
+    stdin_open: true
+
+volumes:
+  data:
+    driver: local
