@@ -1,22 +1,29 @@
 <template>
   <div id="app">
-    <component :is="currentComponent"></component>
+    <component :is="currentComponent" @callComponent="changeComponent"></component>
   </div>
 </template>
 
 <script>
 import Informations from './components/Informations.vue'
+import Inquiries from './components/Inquiries.vue'
 
 export default {
   name: 'app',
   components: {
     Informations, 
+    Inquiries, 
   }, 
   data: function () {
     return {
       currentComponent: 'Informations', 
     } 
   }, 
+  methods: {
+    changeComponent: function (componentName) {
+      this.currentComponent = componentName
+    }
+  }
 }
 </script>
 
@@ -41,6 +48,11 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.w-centered {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 .frame {
   width: 38vw;
